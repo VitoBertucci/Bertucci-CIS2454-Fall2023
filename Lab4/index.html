@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vito's Pizza</title>
+</head>
+<body>
+    <h1>Order Your Pizza</h1>
+    <form action="order.php" method="post">
+        <label for="pizza-size">Choose a Size:</label>
+        <br>
+        <input type="radio" name="pizza-size" value="small"> Small ($5.00)<br>
+        <input type="radio" name="pizza-size" value="medium"> Medium ($7.00)<br>
+        <input type="radio" name="pizza-size" value="large"> Large ($9.00)<br>
+        <br>
+        <label for="toppings">Choose Toppings (Each topping costs extra):</label>
+        <br>
+        <input type="checkbox" name="toppings[]" value="cheese"> Cheese<br>
+        <input type="checkbox" name="toppings[]" value="pepperoni"> Pepperoni<br>
+        <input type="checkbox" name="toppings[]" value="mushrooms"> Mushrooms<br>
+        <input type="checkbox" name="toppings[]" value="sausage"> Sausage<br>
+        <input type="checkbox" name="toppings[]" value="olives"> Olives<br>
+        <input type="checkbox" name="toppings[]" value="onions"> Onions<br>
+        <br>
+        <input type="submit" value="Place Order">
+    </form>
+</body>
+</html>
