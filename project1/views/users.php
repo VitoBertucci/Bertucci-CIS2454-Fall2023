@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
     <?php include ('nav.php') ?>
+    </br>
     <body>
         <h2>Users</h2>
         <table>
@@ -16,45 +17,37 @@
             </tr>
             <?php foreach ($users as $user) : ?>
                 <tr>
-                    <td><?php echo $user['name'] ?></td>
-                    <td><?php echo $user['email_address'] ?></td>
-                    <td><?php echo round($user['cash_balance'], 2) ?></td>
-                    <td><?php echo $user['id'] ?></td>
+                    <td><?php echo $user->get_name() ?></td>
+                    <td><?php echo $user->get_email_address() ?></td>
+                    <td><?php echo round($user->get_cash_balance(), 2) ?></td>
+                    <td><?php echo $user->get_id() ?></td>
                 </tr>
             <?php endforeach; ?>
         </table>
-        
-    
-         <!-- Add a user to the table -->
-        <h2>Add User</h2>
+
+
+        <!-- Add a user to the table -->
+        <h2>Add or Update User</h2>
         <form action='users.php' method='post'>
-            <input type='text' name='name_user' placeholder='Name'/><br>
+            <input type='text' name='name' placeholder='Name'/><br>
             <input type='text' name='email_address' placeholder='Email Address'/><br>
             <input type='text' name='cash_balance' placeholder='Cash Balance'/><br>
-            <input type='hidden' name='action' value='insert_user' /><br>
+            <input type='hidden' name='action' value='insert_or_update_user' /><br>
+            <input type="radio" name="insert_or_update_user" value="insert" checked>Add</br>
+            <input type="radio" name="insert_or_update_user" value="update">Update</br>
             <label>&nbsp;</label>
-            <input type='submit' value='Add User' /><br>
-        </form>
-        <!-- Update a user in the table -->
-        <h2>Update User</h2>
-        <form action='users.php' method='post'>
-            <input type='text' name='user_id' placeholder='User ID'/><br>
-            <input type='text' name='name_user' placeholder='New Name'/><br>
-            <input type='text' name='email_address' placeholder='New Email Address'/><br>
-            <input type='text' name='cash_balance' placeholder='New Cash Balance'/><br>
-            <input type='hidden' name='action' value='update_user' /><br>
-            <label>&nbsp;</label>
-            <input type='submit' value='Update User' /><br>
+            <input type='submit' value='Submit' /><br>
         </form>
         <!-- Delete a user in the table -->
         <h2>Delete User</h2>
         <form action='users.php' method='post'>
-            <input type='text' name='user_id' placeholder='User ID'/><br>
+            <?php include ("userDropDown.php"); ?>
             <input type='hidden' name='action' value='delete_user' /><br>
             <label>&nbsp;</label>
             <input type='submit' value='Delete User' /><br>
         </form>
-        
+
     </body>
+    </br>
     <?php include ('footer.php') ?>
 </html>

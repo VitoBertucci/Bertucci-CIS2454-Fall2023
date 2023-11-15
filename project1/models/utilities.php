@@ -1,26 +1,30 @@
 <?php
+session_start();
 
-    //function to execute a query and handle errors
-    function execute_query(PDO $database, $query, $params = []) {
-        
-        $statement = $database->prepare($query);
-        foreach ($params as $param => $value) {
-            $statement->bindValue($param, $value);
-        }
-        
-        
-        
-        if ($statement->execute()) {
-            return $statement;
-        } else {
-            echo $statement->errorInfo();
-            return false;
-        }
+if (!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] == false ) {
+    if (basename($_SERVER['PHP_SELF']) != 'login.php') {
+        header("Location: index.php");
+        exit(); // Don't forget to call exit() after header()
     }
-    
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
-    ini_set('log_errors', 1);
-    ini_set('error_log', 'stocks_error.log');
+}
+
+//function to execute a query and handle errors
+function execute_query(PDO $database, $query, $params = []) {
+    $statement = $database->prepare($query);
+    foreach ($params as $param => $value) {
+        $statement->bindValue($param, $value);
+    }
+
+    if ($statement->execute()) {
+        // If $params is empty, fetch results; otherwise, return the statement
+        if (empty($params)) {
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return $statement;
+    } else {
+        echo $statement->errorInfo();
+        return false;
+    }
+}
 ?>
 

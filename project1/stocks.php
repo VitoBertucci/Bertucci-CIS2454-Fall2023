@@ -1,38 +1,45 @@
 <?php
 
 try {
-    
+    require_once './models/utilities.php';
     require_once './models/database.php';
     require_once './models/stocks.php';
-    require_once './models/utilities.php';
-    
+
     $action = htmlspecialchars(filter_input(INPUT_POST, "action"));
     $symbol = htmlspecialchars(filter_input(INPUT_POST, "symbol"));
-    $name = htmlspecialchars(filter_input(INPUT_POST, "name"));    
+    $name = htmlspecialchars(filter_input(INPUT_POST, "name"));
     $current_price = filter_input(INPUT_POST, "current_price", FILTER_VALIDATE_FLOAT);
-    
-    //display tables
-    $stocks = display_stocks();
-    include ('views/stocks.php');
-    
+
     switch ($action) {
-        case "insert_stock":
-            insert_stock($symbol, $name, $current_price);
-            header("Location: stocks.php");
-            break;
-        case "update_stock":
-            update_stock($symbol, $name, $current_price);
+        case "insert_or_update_stock":
+            if ($symbol !== "" && $name !== "" && $current_price !== false) {
+                $insert_or_update_stock = filter_input(INPUT_POST, 'insert_or_update_stock');
+
+                $stock = new Stock($symbol, $name, $current_price);
+
+                if ($insert_or_update_stock == "insert") {
+                    insert_stock($stock);
+                } else if ($insert_or_update_stock == "update") {
+                    update_stock($stock);
+                }
+            }
             header("Location: stocks.php");
             break;
         case "delete_stock":
-            delete_stock($symbol);
+            if ($symbol !== false) {
+                $stock = new Stock($symbol, "", 0);
+                delete_stock($stock);
+            }
             header("Location: stocks.php");
-            break;    
+            break;
+        default:
+            break;
     }
-    
+
+    $stocks = display_stocks();
+    include ('views/stocks.php');
 } catch (Exception $e) {
     $error_message = $e->getMessage();
     include('./views/error.php');
 }
 ?>
-
