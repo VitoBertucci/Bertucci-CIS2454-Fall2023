@@ -3,8 +3,8 @@
 <%@page import="stocks.Stock" %>
 <c:import url="/views/header.jsp" />
 
-<% 
-    Stock stock = (Stock)request.getAttribute("stock");
+<%
+    Stock stock = (Stock) request.getAttribute("stock");
 %>
 
 <h1>Stocks</h1>
@@ -16,11 +16,11 @@
         <th>Price</th>
     </tr>
     <c:forEach items="${stocks}" var="stock">
-    <tr>        
-        <td>${stock.symbol}</td>
-        <td>${stock.name}</td>
-        <td>${stock.currentPrice}</td>
-    </tr>
+        <tr>        
+            <td>${stock.symbol}</td>
+            <td>${stock.name}</td>
+            <td>${stock.currentPrice}</td>
+        </tr>
     </c:forEach>
 </table>
 
