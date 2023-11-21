@@ -9,11 +9,10 @@ public class Buzz {
     private String text;
     private Timestamp timestamp;
 
-    public Buzz(int id, int userId, String text, Timestamp timestamp) {
+    public Buzz(int id, int userId, String text) {
         this.id = id;
         this.userId = userId;
         this.text = text;
-        this.timestamp = timestamp;
     }
 
     public int getId() {
@@ -47,5 +46,4 @@ public class Buzz {
     public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
     }
-
 }

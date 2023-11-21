@@ -4,10 +4,14 @@
     GregorianCalendar currentDate = new GregorianCalendar();
     int currentYear = currentDate.get(Calendar.YEAR);
 %>
-<footer>
-    <p>
-        &copy; <%= currentYear%> Bertucci BitBuzz
-    </p>
-</footer>
-</body>
+
+            </div>
+        </main>
+        
+        <footer>
+            <p>
+                &copy; <%= currentYear%> Bertucci - BitBuzz
+            </p>
+        </footer>
+    </body>
 </html>
