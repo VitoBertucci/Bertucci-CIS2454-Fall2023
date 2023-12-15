@@ -4,56 +4,50 @@
 <%@page import="BitBuzz.User, BitBuzz.Buzz" %>
 <c:import url="header.jsp" />
 
+<div class="page-title">
+    <h1>Data - Users and Buzzes</h1>
+</div>
+
 <div class="table-container">
     <table>
         <tr>
-            <th>ID</th>
             <th>Username</th>
             <th>Email Address</th>
-            <th>Password</th>
+            <th>Follow</th>
         </tr>
         <c:forEach items="${users}" var="user">
-            <tr>        
-                <td>${user.id}</td>
-                <td>${user.username}</td>
+            <tr>
+                <td>
+                    <a href="BitBuzz?action=displayProfile&username=${user.username}">${user.username}</a>
+                </td>
                 <td>${user.emailAddress}</td>
-                <td>...${fn:substring(user.password, fn:length(user.password) - 4, fn:length(user.password))}</td>
+                <td>
+                    <div class='follow-form'>
+                        <form action='BitBuzz' method='post'>
+                            <input type='hidden' name='action' value='followUser' />
+                            <input type='hidden' name='userIdToFollow' value='${user.id}' />
+                            <input type='submit' value='Follow'/>
+                        </form>
+                    </div>
+                </td>
             </tr>
         </c:forEach>
     </table>
 
     <table>
         <tr>
-            <th>ID</th>
-            <th>User ID</th>
             <th>Text</th>
             <th>Timestamp</th>
+            <th>Likes</th>
         </tr>
         <c:forEach items="${buzzes}" var="buzz">
             <tr>        
-                <td>${buzz.id}</td>
-                <td>${buzz.userId}</td>
                 <td>${buzz.text}</td>
                 <td>${buzz.timestamp}</td>
+                <td>${buzz.likeCount}</td>
             </tr>
         </c:forEach>
     </table>
-</div>
-
-<div class="form-container">
-    <form action='BitBuzz' method='post'>
-        <input type='text' name='username' placeholder='Username'/><br>
-        <input type='text' name='password' placeholder='Password'/><br>
-        <input type='text' name='emailAddress' placeholder='Email Address'/><br>
-        <input type='hidden' name='action' value='createUser' /><br>
-        <input type='submit' value='Add User' /><br>
-    </form>
-
-    <form action='BitBuzz' method='post'>
-        <input type='text' name='text' placeholder='Text'/><br>
-        <input type='hidden' name='action' value='createBuzz' /><br>
-        <input type='submit' value='Add Buzz' /><br>
-    </form>
 </div>
 
 <c:import url="footer.jsp" />

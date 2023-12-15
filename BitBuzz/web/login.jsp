@@ -3,6 +3,10 @@
 
 <c:import url="header.jsp" />
 
+<div class="page-title">
+    <h1>BitBuzz - Like Twitter but Wayyyy Cooler</h1>
+</div>
+
 <% if (request.getAttribute("loginError") != null) {%>
         <p><%= request.getAttribute("loginError")%></p>
 <% }%>
@@ -12,6 +16,7 @@
     <input type='text' name='password' placeholder='Password'/><br>
     <input type='hidden' name='action' value='login' /><br>
     <input type="submit" value="Login">
-</form>
+    <a class="signup-link" href="signup.jsp">Sign Up</a>
+</form>    
 
 <c:import url="footer.jsp" />

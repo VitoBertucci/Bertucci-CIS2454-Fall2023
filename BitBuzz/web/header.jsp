@@ -19,12 +19,18 @@
             <nav>
                 <ul>
                     <% if (session != null && session.getAttribute("user") != null) {%>
-                    <li><%= loggedInUser.getUsername()%></li>
+                    
+                    <li><a href="BitBuzz?action=displayProfile&username=<%= loggedInUser.getUsername() %>" class="<%= "displayProfile".equals(currentAction) ? "active-link" : "" %>"><%= loggedInUser.getUsername()%></a></li>
                     <li><a href="BitBuzz?action=home" class="<%= "home".equals(currentAction) ? "active-link" : "" %>">Home</a></li>
-                    <li><a href="BitBuzz?action=listUsers" class="<%= "listUsers".equals(currentAction) ? "active-link" : "" %>">Users</a></li>
-                    <li><a href="BitBuzz?action=listBuzzes" class="<%= "listBuzzes".equals(currentAction) ? "active-link" : "" %>">Buzzes</a></li>
                     <li><a href="BitBuzz?action=listData" class="<%= "listData".equals(currentAction) ? "active-link" : "" %>">Data</a></li>
                     <li><a href="BitBuzz?action=logout">Logout</a></li>
+                    <li>
+                        <form class="search-bar" action="BitBuzz" method="get">
+                            <input type="text" name="username" placeholder="Search User"/>
+                            <input type="hidden" name="action" value="displayProfile"/>
+                            <input type="submit" value="Go"/>
+                        </form>                        
+                    </li>
                         <% } else { %>
                     <li>No User</li>
                         <% }%>

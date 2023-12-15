@@ -4,15 +4,17 @@ import java.sql.Timestamp;
 
 public class Buzz {
 
-    private int id;
-    private int userId;
-    private String text;
-    private Timestamp timestamp;
+    private int id, userId, likeCount;
+    private String text, timestamp, authorUsername;
+    private Timestamp originalTimestamp;
 
-    public Buzz(int id, int userId, String text) {
+    public Buzz(int id, int userId, String text, String timestamp, Timestamp originalTimestamp, int likeCount) {
         this.id = id;
         this.userId = userId;
         this.text = text;
+        this.timestamp = timestamp;
+        this.originalTimestamp = originalTimestamp;
+        this.likeCount = likeCount;
     }
 
     public int getId() {
@@ -39,11 +41,36 @@ public class Buzz {
         this.text = text;
     }
 
-    public Timestamp getTimestamp() {
+    public String getAuthorUsername() {
+        return authorUsername;
+    }
+
+    public void setAuthorUsername(String authorUsername) {
+        this.authorUsername = authorUsername;
+    }
+
+    public Timestamp getOriginalTimestamp() {
+        return originalTimestamp;
+    }
+
+    public void setOriginalTimestamp(Timestamp originalTimestamp) {
+        this.originalTimestamp = originalTimestamp;
+    }
+
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
+
+    public int getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+    }
+
 }
